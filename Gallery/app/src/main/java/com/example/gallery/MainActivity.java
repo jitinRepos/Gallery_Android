@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.media.session.MediaSession;
 import android.os.Bundle;
+import android.os.Environment;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.karumi.dexter.Dexter;
@@ -20,33 +22,38 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView lt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        lt = findViewById(R.id.listVew);
+        lt = findViewById(R.id.listView);
+
 
         Dexter.withContext(this)
                 .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new PermissionListener() {
-                    @Override public void onPermissionGranted(PermissionGrantedResponse response) {/* ... */}
+                    @Override public void onPermissionGranted(PermissionGrantedResponse response) {
+                        NumbersViewAdapter ad = new NumbersViewAdapter(getApplicationContext(), fetchFiles(Environment.getExternalStorageDirectory()));
+                        lt.setAdapter(ad);
+                    }
                     @Override public void onPermissionDenied(PermissionDeniedResponse response) {/* ... */}
                     @Override public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
                 }).check();
     }
-    public ArrayList<File> fetchSongs(File file){
+    public ArrayList<File> fetchFiles(File file){
         ArrayList arrayList = new ArrayList();
         File[] songs = file.listFiles();
 
         if(songs != null){
             for(File myFile: songs){
                 if(!myFile.isHidden() && myFile.isDirectory()){
-                    arrayList.addAll(fetchSongs(myFile));
+                    arrayList.addAll(fetchFiles(myFile));
                 }
                 else{
-                    if(myFile.getName().endsWith(".mp3") && !myFile.getName().startsWith(".")){
+                    if(myFile.getName().endsWith(".png")  || myFile.getName().endsWith(".jpg") && !myFile.getName().startsWith(".")){
                         arrayList.add(myFile);
                     }
                 }

@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_Github/Gallery_Android/Gallery/app/src/main/res/layout/activity_main.xml" value="0.34479166666666666" />
+        <entry key="..\:/Android_Github/Gallery_Android/Gallery/app/src/main/res/layout/custom_list_view.xml" value="0.34479166666666666" />
+        <entry key="..\:/Android_Github/Gallery_Android/Gallery/app/src/main/res/layout/list_item.xml" value="0.34479166666666666" />
+        <entry key="..\:/Android_Github/Gallery_Android/Gallery/app/src/main/res/layout/main.xml" value="0.25" />
         <entry key="..\:/Video/Gallery/app/src/main/res/layout/activity_main.xml" value="0.3307291666666667" />
       </map>
     </option>
